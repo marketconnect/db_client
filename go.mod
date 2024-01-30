@@ -1,4 +1,4 @@
-module db_client
+module github.com/marketconnect/db_client
 
 go 1.21.6
 
