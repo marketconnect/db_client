@@ -42,15 +42,13 @@ func NewClient(ctx context.Context, maxAttempts int, maxDelay time.Duration, cfg
 
 		pgxCfg, err := pgxpool.ParseConfig(dsn)
 		if err != nil {
-			log.Fatalf("Unable to parse config: %v\n", err)
+			log.Printf("Failed to connect to postgres: %v", err)
+			return err
 		}
-
-		// pgxCfg.ConnConfig.Logger = logrusadapter.NewLogger(logger)
 
 		pool, err = pgxpool.ConnectConfig(ctx, pgxCfg)
 		if err != nil {
 			log.Println("Failed to connect to postgres... Going to do the next attempt")
-
 			return err
 		}
 
@@ -58,7 +56,8 @@ func NewClient(ctx context.Context, maxAttempts int, maxDelay time.Duration, cfg
 	}, maxAttempts, maxDelay)
 
 	if err != nil {
-		log.Fatal("All attempts are exceeded. Unable to connect to postgres")
+		log.Printf("All attempts are exceeded. Unable to connect to postgres")
+		return nil, err
 	}
 
 	return pool, nil

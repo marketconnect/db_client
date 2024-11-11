@@ -7,7 +7,10 @@ require (
 	github.com/jackc/pgx/v4 v4.18.1
 )
 
+require github.com/cloudflare/golz4 v0.0.0-20150217214814-ef862a3cdc58 // indirect
+
 require (
+	github.com/ClickHouse/clickhouse-go v1.5.4
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
