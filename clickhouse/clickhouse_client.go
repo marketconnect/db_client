@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	_ "github.com/ClickHouse/clickhouse-go" // Import ClickHouse driver
+	_ "github.com/ClickHouse/clickhouse-go"
 )
 
 type ClickHouseConfig struct {
@@ -18,7 +18,6 @@ type ClickHouseConfig struct {
 	Password string
 }
 
-// NewClickHouseConfig creates a new ClickHouseConfig instance.
 func NewClickHouseConfig(host, port, database, username, password string) *ClickHouseConfig {
 	return &ClickHouseConfig{
 		Host:     host,
@@ -29,12 +28,10 @@ func NewClickHouseConfig(host, port, database, username, password string) *Click
 	}
 }
 
-// ClickHouseClientImpl is the actual implementation of ClickHouseClient interface.
 type ClickHouseClientImpl struct {
 	db *sql.DB
 }
 
-// NewClickHouseClient initializes and returns a new ClickHouse client with retries.
 func NewClickHouseClient(ctx context.Context, maxAttempts int, maxDelay time.Duration, cfg *ClickHouseConfig) (*ClickHouseClientImpl, error) {
 	dsn := fmt.Sprintf("tcp://%s:%s?database=%s&username=%s&password=%s",
 		cfg.Host, cfg.Port, cfg.Database, cfg.Username, cfg.Password)
