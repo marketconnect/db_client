@@ -89,3 +89,8 @@ func (c *ClickHouseClientImpl) QueryRow(ctx context.Context, query string, args 
 func (c *ClickHouseClientImpl) Exec(ctx context.Context, query string, args ...interface{}) (sql.Result, error) {
 	return c.db.ExecContext(ctx, query, args...)
 }
+
+// Close closes the connection to the database.
+func (c *ClickHouseClientImpl) Close() error {
+	return c.db.Close()
+}
