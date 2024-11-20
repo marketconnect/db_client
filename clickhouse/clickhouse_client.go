@@ -50,7 +50,7 @@ func NewClickHouseClient(ctx context.Context, maxAttempts int, maxDelay time.Dur
 		defer cancel()
 		err = db.PingContext(ctx)
 		if err != nil {
-			log.Println("Ping to ClickHouse failed. Retrying...")
+			log.Printf("Ping to ClickHouse failed. Retrying.dsn: %s", dsn)
 			return err
 		}
 		return nil
