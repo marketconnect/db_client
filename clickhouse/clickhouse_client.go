@@ -42,7 +42,7 @@ func NewClickHouseClient(ctx context.Context, maxAttempts int, maxDelay time.Dur
 	err = doWithAttempts(func() error {
 		db, err = sql.Open("clickhouse", dsn)
 		if err != nil {
-			log.Println("Failed to connect to ClickHouse. Retrying...")
+			log.Printf("Failed to connect to ClickHouse. Retrying. dsn: %s", dsn)
 			return err
 		}
 		// Try a ping to verify the connection
