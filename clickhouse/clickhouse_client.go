@@ -33,7 +33,8 @@ type ClickHouseClientImpl struct {
 }
 
 func NewClickHouseClient(ctx context.Context, maxAttempts int, maxDelay time.Duration, cfg *ClickHouseConfig) (*ClickHouseClientImpl, error) {
-	dsn := fmt.Sprintf("tcp://%s:%s?database=%s&username=%s&password=%s",
+
+	dsn := fmt.Sprintf("tcp://%s:%s/%s?username=%s&password=%s",
 		cfg.Host, cfg.Port, cfg.Database, cfg.Username, cfg.Password)
 
 	var db *sql.DB
